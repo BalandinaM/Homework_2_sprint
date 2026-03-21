@@ -2,19 +2,34 @@
 }
 
 .input {
+    width: 372px;
+    height: 36px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
 }
 
 .inputWrapper {
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .superInput {
 }
 
 .errorInput {
+    width: 372px;
+    height: 36px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    border: 2px solid red;
 }
 
 .errorInput:focus {
 }
 
 .error {
+    margin-bottom: 9PX;
+    color: red;
 }
