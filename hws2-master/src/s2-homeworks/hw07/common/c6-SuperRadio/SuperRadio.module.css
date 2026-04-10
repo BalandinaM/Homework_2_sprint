@@ -9,7 +9,12 @@
 }
 
 .label {
+    display: flex;
+    gap: 10px;
 }
 
 .options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }

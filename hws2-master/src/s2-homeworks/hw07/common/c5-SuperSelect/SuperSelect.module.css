@@ -1,4 +1,6 @@
 .select {
+    padding: 5px 10px;
+    width: 165px;
 }
 
 .select:focus {
