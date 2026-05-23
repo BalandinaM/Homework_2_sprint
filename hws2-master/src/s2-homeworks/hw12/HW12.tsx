@@ -1,17 +1,10 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect } from 'react'
 import s from './HW12.module.css'
 import s2 from '../../s1-main/App.module.css'
 import SuperSelect from '../hw07/common/c5-SuperSelect/SuperSelect'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeThemeId } from './bll/themeReducer'
 import { AppStoreType } from '../hw10/bll/store'
-
-/*
- * 1 - в файле themeReducer.ts написать нужные типы вместо any, дописать редьюсер
- * 2 - получить themeId из редакса
- * 3 - дописать тип и логику функции change
- * 4 - передать пропсы в SuperSelect
- * */
 
 const themes = [
   { id: 1, value: 'light' },
@@ -20,7 +13,6 @@ const themes = [
 ]
 
 const HW12 = () => {
-  // взять ид темы из редакса
   const themeId = useSelector((state: AppStoreType) => state.theme.themeId)
   console.log(themeId)
   const dispatch = useDispatch()
