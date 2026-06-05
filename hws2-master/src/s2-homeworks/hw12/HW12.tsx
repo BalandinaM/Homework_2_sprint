@@ -14,7 +14,6 @@ const themes = [
 
 const HW12 = () => {
   const themeId = useSelector((state: AppStoreType) => state.theme.themeId)
-  console.log(themeId)
   const dispatch = useDispatch()
 
   const change = (id: any) => {
