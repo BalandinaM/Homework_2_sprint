@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import SuperSelect from '../../../hw07/common/c5-SuperSelect/SuperSelect'
 import { Pagination } from '@mui/material'
 import s from './SuperPagination.module.css'
@@ -18,30 +18,30 @@ const SuperPagination: React.FC<SuperPaginationPropsType> = ({
   onChange,
   id = 'hw15',
 }) => {
-  const lastPage = Math.ceil(totalCount / itemsCountForPage) || 1
+  const lastPage = Math.ceil(totalCount / itemsCountForPage)
 
-  const onChangeCallback = (event: ChangeEvent<unknown>, page: number) => {
+  const onChangeCallback = (event: any, page: number) => {
     onChange(page, itemsCountForPage)
   }
 
-  const onChangeSelect = (newCount: number) => {
-    // console.log(event.currentTarget.value)
-    console.log('Выбрано:', newCount)
-    onChange(1, newCount)
-
-    //const newCount = Number(event.currentTarget.value) // преобразуем строку в число
-    //onChange(1, newCount) // сбрасываем на первую страницу с новым количеством элементов
+  const onChangeSelect = (value: number) => {
+    onChange(1, value)
   }
 
   return (
     <div className={s.pagination}>
       <Pagination
         id={id + '-pagination'}
+        sx={{
+          '& .MuiPaginationItem-root': {
+            color: 'white',
+          },
+        }}
         page={page}
         count={lastPage}
         onChange={onChangeCallback}
-        hideNextButton
-        hidePrevButton
+        hideNextButton={false}
+        hidePrevButton={false}
       />
 
       <span className={s.text1}>показать</span>

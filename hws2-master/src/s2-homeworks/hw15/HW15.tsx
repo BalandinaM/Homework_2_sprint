@@ -53,46 +53,56 @@ const HW15 = () => {
     setLoading(true)
     getTechs(params)
       .then(res => {
-        if (res) {
+        if (res && res.data) {
           setTechs(res.data.techs)
           setTotalCount(res.data.totalCount)
         }
+        setLoading(false)
       })
-      .finally(() => {
+      .catch(() => {
         setLoading(false)
       })
   }
 
   const onChangePagination = (newPage: number, newCount: number) => {
-    console.log(newPage, newCount)
-    setLoading(true)
     setPage(newPage)
     setCount(newCount)
-    setSearchParams({ page: newPage.toString(), count: newCount.toString() })
-    sendQuery({ sort, newPage, newCount })
-    setLoading(false)
+
+    const params = { sort, page: newPage, count: newCount }
+    sendQuery(params)
+
+    const newSearchParams = new URLSearchParams()
+    if (sort) newSearchParams.set('sort', sort)
+    newSearchParams.set('page', String(newPage))
+    newSearchParams.set('count', String(newCount))
+    setSearchParams(newSearchParams)
   }
 
   const onChangeSort = (newSort: string) => {
-    setLoading(true)
     setSort(newSort)
     setPage(1)
 
-    setSearchParams({
-      sort: newSort,
-      page: page.toString(),
-      count: count.toString(),
-    })
-    sendQuery({ newSort, page, count })
-    setLoading(false)
+    const params = { sort: newSort, page: 1, count }
+    sendQuery(params)
+
+    const newSearchParams = new URLSearchParams()
+    if (newSort) newSearchParams.set('sort', newSort)
+    newSearchParams.set('page', '1')
+    newSearchParams.set('count', String(count))
+    setSearchParams(newSearchParams)
   }
 
   useEffect(() => {
     const params = Object.fromEntries(searchParams)
-    sendQuery({ sort: params.sort, page: params.page, count: params.count })
-    setSort(params.sort || '')
-    setPage(+params.page || 1)
-    setCount(+params.count || 4)
+    const pageNum = +params.page || 1
+    const countNum = +params.count || 4
+    const sortParam = params.sort || ''
+
+    setPage(pageNum)
+    setCount(countNum)
+    setSort(sortParam)
+
+    sendQuery({ sort: sortParam, page: pageNum, count: countNum })
   }, [])
 
   const mappedTechs = techs.map(t => (
